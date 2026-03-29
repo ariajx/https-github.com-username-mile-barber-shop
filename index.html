@@ -4,21 +4,422 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MILE BARBERSHOP | Premium Grooming & Masters</title>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js (Untuk Interaktivitas) -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
+    <!-- Tailwind CSS dengan config SEBELUM load -->
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwindConfig = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#121212',
+                        'gold': '#D4AF37',
+                        'off-white': '#F9F9F9'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#121212', // Charcoal
-                        'gold': '#D4AF37',    // Muted Gold
+                        'primary': '#121212',
+                        'gold': '#D4AF37',
                         'off-white': '#F9F9F9'
                     },
                     fontFamily: {
                         'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --primary: #121212;
+        }
+        body {
+            background-color: #F9F9F9;
+            color: #121212;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-gold-custom { color: #D4AF37; }
+        .bg-primary-custom { background-color: #121212; }
+        .border-gold-custom { border-color: #D4AF37; }
+
+        .custom-gradient {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                        url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80') center/cover fixed;
+        }
+        .hover-gold:hover { color: #D4AF37; }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            width: 100%;
+            z-index: 50;
+            background-color: rgba(18,18,18,0.97);
+            color: white;
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            align-items: center;
+        }
+        .nav-links a { color: white; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #D4AF37; }
+        .nav-book {
+            background: #D4AF37;
+            color: white !important;
+            padding: 12px 28px;
+            transition: background 0.4s, color 0.4s !important;
+        }
+        .nav-book:hover { background: white !important; color: #121212 !important; }
+
+        /* Hero */
+        header.hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-content h4 {
+            color: #D4AF37;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            font-size: 0.8rem;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .hero-content h1 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+        .hero-btn {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 16px 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            text-decoration: none;
+            transition: background 0.6s, color 0.6s;
+            display: inline-block;
+        }
+        .hero-btn:hover { background: white; color: black; }
+
+        /* Sections */
+        section { padding: 96px 80px; }
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            section { padding: 64px 24px; }
+        }
+
+        /* Philosophy */
+        .philosophy { background: white; text-align: center; }
+        .philosophy blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-style: italic;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .divider { width: 80px; height: 1px; background: #D4AF37; margin: 0 auto 32px; }
+        .philosophy p { color: #71717a; line-height: 1.8; font-weight: 300; max-width: 600px; margin: 0 auto; }
+
+        /* Styles grid */
+        .styles-section { background: #f4f4f4; }
+        .styles-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; flex-wrap: wrap; gap: 16px; }
+        .styles-header h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 8px; }
+        .styles-header p { color: #71717a; }
+        .catalog-link { color: #D4AF37; border-bottom: 1px solid #D4AF37; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
+        .catalog-link:hover { color: #121212; border-color: #121212; }
+
+        .styles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        .style-card { position: relative; overflow: hidden; background: black; aspect-ratio: 3/4; }
+        .style-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 1s, opacity 0.5s; }
+        .style-card:hover img { transform: scale(1.1); opacity: 0.6; }
+        .style-info {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 32px;
+        }
+        .style-info h3 { color: white; font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; }
+        .style-info p { color: #a1a1aa; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .style-link { color: #D4AF37; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; opacity: 0; transition: opacity 0.4s; }
+        .style-card:hover .style-link { opacity: 1; }
+
+        /* Barbers */
+        .barbers-section { background: white; }
+        .section-title { text-align: center; margin-bottom: 64px; }
+        .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 12px; }
+        .section-title .bar { width: 48px; height: 4px; background: #D4AF37; margin: 0 auto; }
+        .barbers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; max-width: 900px; margin: 0 auto; }
+        .barber-card { display: flex; align-items: center; gap: 32px; padding: 24px; filter: grayscale(1); transition: filter 0.6s, box-shadow 0.4s; border: 1px solid transparent; }
+        .barber-card:hover { filter: grayscale(0); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: #f4f4f5; }
+        .barber-card img { width: 140px; height: 200px; object-fit: cover; flex-shrink: 0; }
+        .barber-info h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 6px; }
+        .barber-info .role { color: #D4AF37; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+        .barber-info blockquote { color: #71717a; font-size: 0.85rem; font-style: italic; }
+
+        /* Testimonial */
+        .testimonial { background: #121212; color: white; text-align: center; }
+        .stars { color: #D4AF37; font-size: 1.3rem; margin-bottom: 32px; letter-spacing: 4px; }
+        .testimonial blockquote { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-style: italic; margin-bottom: 32px; max-width: 760px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+        .testimonial cite { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: #a1a1aa; }
+
+        /* Booking */
+        .booking-section { background: #f9f9f9; }
+        .booking-card { max-width: 900px; margin: 0 auto; background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.1); display: flex; overflow: hidden; }
+        .booking-left { background: #121212; color: white; padding: 48px; flex: 0 0 300px; }
+        .booking-left h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 24px; }
+        .booking-left p { color: #a1a1aa; font-size: 0.85rem; line-height: 1.7; margin-bottom: 32px; }
+        .booking-info { font-size: 0.75rem; color: #a1a1aa; display: flex; flex-direction: column; gap: 16px; }
+        .booking-right { padding: 48px; flex: 1; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .form-field { display: flex; flex-direction: column; gap: 6px; }
+        .form-field label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; color: #a1a1aa; }
+        .form-field select, .form-field input {
+            border: none; border-bottom: 1px solid #e4e4e7;
+            padding: 10px 0; outline: none; background: transparent;
+            font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #121212;
+            transition: border-color 0.3s;
+        }
+        .form-field select:focus, .form-field input:focus { border-color: #D4AF37; }
+        .form-field-full { margin-bottom: 24px; }
+        .submit-btn {
+            width: 100%; background: #121212; color: white;
+            padding: 16px; border: none; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; font-weight: 700;
+            transition: background 0.4s; font-family: 'Inter', sans-serif;
+        }
+        .submit-btn:hover { background: #D4AF37; }
+        @media (max-width: 768px) {
+            .booking-card { flex-direction: column; }
+            .booking-left { flex: none; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        footer {
+            background: #121212; color: white;
+            padding: 48px 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            flex-wrap: wrap; gap: 24px;
+        }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+        .footer-links { display: flex; gap: 32px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; }
+        .footer-links a { color: #71717a; text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: #D4AF37; }
+        .footer-copy { font-size: 0.65rem; color: #52525b; }
+        @media (max-width: 768px) { footer { padding: 40px 24px; flex-direction: column; text-align: center; } }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-logo">MILE<span style="color:#D4AF37">.</span></div>
+        <div class="nav-links">
+            <a href="#about">Our Story</a>
+            <a href="#styles">Lookbook</a>
+            <a href="#barbers">Masters</a>
+            <a href="#booking" class="nav-book">Book Appointment</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero custom-gradient">
+        <div class="hero-content" style="padding: 0 24px;">
+            <h4>The Art of Precision</h4>
+            <h1>Crafting Your<br>Signature Presence.</h1>
+            <a href="#styles" class="hero-btn">Explore Styles</a>
+        </div>
+    </header>
+
+    <!-- PHILOSOPHY -->
+    <section id="about" class="philosophy">
+        <div style="max-width:680px; margin:0 auto;">
+            <blockquote>"Bukan sekadar potong rambut, melainkan sebuah ritual kemewahan yang merayakan identitas setiap pria."</blockquote>
+            <div class="divider"></div>
+            <p>MILE Barbershop menghadirkan standar baru dalam dunia grooming. Menggabungkan teknik tradisional dengan estetika modern di dalam ruang yang dirancang untuk kenyamanan maksimal Anda.</p>
+        </div>
+    </section>
+
+    <!-- LOOKBOOK -->
+    <section id="styles" class="styles-section">
+        <div class="styles-header">
+            <div>
+                <h2>Signature Styles</h2>
+                <p>Pilih karakter yang ingin Anda tunjukkan.</p>
+            </div>
+            <a href="#" class="catalog-link">View Full Catalog</a>
+        </div>
+        <div class="styles-grid">
+            <div class="style-card">
+                <img src="https://images.unsplash.com/photo-1621605815841-aa89740b0282?auto=format&fit=crop&q=80" alt="Executive Quiff">
+                <div class="style-info">
+                    <h3>The Executive Quiff</h3>
+                    <p>45 Mins · Classic & Sharp</p>
+                    <a href="#booking" class="style-link">Select Style →</a>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="https://images.unsplash.com/photo-1599351431247-f50776d1d563?auto=format&fit=crop&q=80" alt="Modern Skin Fade">
+                <div class="style-info">
+                    <h3>Modern Skin Fade</h3>
+                    <p>60 Mins · Bold & Precision</p>
+                    <a href="#booking" class="style-link">Select Style →</a>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&q=80" alt="Signature Beard Trim">
+                <div class="style-info">
+                    <h3>Signature Beard Trim</h3>
+                    <p>30 Mins · Detail Oriented</p>
+                    <a href="#booking" class="style-link">Select Style →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARBERS -->
+    <section id="barbers" class="barbers-section">
+        <div class="section-title">
+            <h2>Meet The Masters</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="barbers-grid">
+            <div class="barber-card">
+                <img src="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?auto=format&fit=crop&q=80" alt="Julian Mike">
+                <div class="barber-info">
+                    <h3>Julian Mike</h3>
+                    <p class="role">Master of Classic Cut</p>
+                    <blockquote>"Ketelitian adalah bahasa saya dalam menciptakan karya seni di setiap helai rambut."</blockquote>
+                </div>
+            </div>
+            <div class="barber-card">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80" alt="Adrian Doss">
+                <div class="barber-info">
+                    <h3>Adrian Doss</h3>
+                    <p class="role">Fade & Texture Specialist</p>
+                    <blockquote>"Menghadirkan rasa percaya diri melalui presisi gradasi yang sempurna."</blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="testimonial">
+        <div style="max-width:760px; margin:0 auto;">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Pengalaman terbaik yang pernah saya dapatkan. Detail pelayanannya luar biasa, dari kopi gratis hingga handuk hangat setelah cukur. MILE benar-benar mengerti arti kualitas."</blockquote>
+            <cite>— Bagas Pratama, Senior Director</cite>
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="booking" class="booking-section">
+        <div class="booking-card">
+            <div class="booking-left">
+                <h2>Reserve Your Seat</h2>
+                <p>Pilih jadwal Anda dan rasakan transformasi maksimal di tangan ahli kami.</p>
+                <div class="booking-info">
+                    <span>📍 Sudirman Business District, Jakarta</span>
+                    <span>📞 +62 812 3456 7890</span>
+                    <span>⏰ 10:00 AM - 09:00 PM</span>
+                </div>
+            </div>
+            <div class="booking-right">
+                <form onsubmit="return false;">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label>Pilih Layanan</label>
+                            <select>
+                                <option>Signature Haircut</option>
+                                <option>Beard Grooming</option>
+                                <option>The Ultimate MILE Package</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Pilih Barber</label>
+                            <select>
+                                <option>Julian Mike</option>
+                                <option>Adrian Doss</option>
+                                <option>Any Barber</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Tanggal</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-field">
+                            <label>Waktu</label>
+                            <select>
+                                <option>10:00 AM</option>
+                                <option>13:00 PM</option>
+                                <option>16:00 PM</option>
+                                <option>19:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field form-field-full">
+                        <label>Nama Lengkap</label>
+                        <input type="text" placeholder="Your Name">
+                    </div>
+                    <button type="submit" class="submit-btn">Confirm Appointment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">MILE<span style="color:#D4AF37">.</span></div>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <p class="footer-copy">© 2025 MILE BARBERSHOP. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+</body>
+</html>
