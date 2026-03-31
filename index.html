@@ -6,7 +6,6 @@
     <title>MILE BARBERSHOP | Premium Grooming & Masters</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS dengan config SEBELUM load -->
     <script>
         window.tailwind = window.tailwind || {};
         window.tailwindConfig = {
@@ -55,9 +54,7 @@
             color: #121212;
             font-family: 'Inter', sans-serif;
         }
-        .font-serif-custom {
-            font-family: 'Playfair Display', serif;
-        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
         .text-gold-custom { color: #D4AF37; }
         .bg-primary-custom { background-color: #121212; }
         .border-gold-custom { border-color: #D4AF37; }
@@ -199,10 +196,44 @@
         .barber-info blockquote { color: #71717a; font-size: 0.85rem; font-style: italic; }
 
         /* Testimonial */
-        .testimonial { background: #121212; color: white; text-align: center; }
+        .testimonial { background: #121212; color: white; text-align: center; padding: 96px 80px; }
+        .testimonial-wrapper { display: flex; flex-direction: column; gap: 64px; }
+        .testimonial-item { max-width: 760px; margin: 0 auto; }
         .stars { color: #D4AF37; font-size: 1.3rem; margin-bottom: 32px; letter-spacing: 4px; }
-        .testimonial blockquote { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-style: italic; margin-bottom: 32px; max-width: 760px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-        .testimonial cite { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: #a1a1aa; }
+        .testimonial-item blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-style: italic;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+        .testimonial-item .reviewer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .testimonial-item .reviewer img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #D4AF37;
+        }
+        .testimonial-item cite {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #a1a1aa;
+            font-style: normal;
+        }
+        .testimonial-divider {
+            width: 60px;
+            height: 1px;
+            background: rgba(212,175,55,0.3);
+            margin: 0 auto;
+        }
 
         /* Booking */
         .booking-section { background: #f9f9f9; }
@@ -230,6 +261,28 @@
             transition: background 0.4s; font-family: 'Inter', sans-serif;
         }
         .submit-btn:hover { background: #D4AF37; }
+
+        /* WhatsApp Button */
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            padding: 14px 32px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.3s, transform 0.2s;
+            border-radius: 2px;
+        }
+        .wa-btn:hover {
+            background: #1ebe5d;
+            transform: translateY(-2px);
+        }
         @media (max-width: 768px) {
             .booking-card { flex-direction: column; }
             .booking-left { flex: none; }
@@ -250,6 +303,33 @@
         .footer-links a:hover { color: #D4AF37; }
         .footer-copy { font-size: 0.65rem; color: #52525b; }
         @media (max-width: 768px) { footer { padding: 40px 24px; flex-direction: column; text-align: center; } }
+
+        /* Floating WA Button */
+        .wa-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 999;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse-wa 2s infinite;
+        }
+        .wa-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37,211,102,0.7);
+        }
+        @keyframes pulse-wa {
+            0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+            70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
     </style>
 </head>
 <body>
@@ -348,14 +428,30 @@
 
     <!-- TESTIMONIAL -->
     <section class="testimonial">
-        <div style="max-width:760px; margin:0 auto;">
-            <div class="stars">★★★★★</div>
-            <blockquote>"Pengalaman terbaik yang pernah saya dapatkan. Detail pelayanannya luar biasa, dari kopi gratis hingga handuk hangat setelah cukur. MILE benar-benar mengerti arti kualitas."</blockquote>
-            <cite>— denny sumargo, entertainment</cite>
-               <div style="max-width:760px; margin:0 auto;">
-            <div class="stars">★★★★★</div>
-            <blockquote>" Reservasi secara online membuat jadwal saya untuk ke barber lebih worth ditambah excellence service dari MILE  crew"</blockquote>
-            <cite>— Raymond chin, Influncer</cite>
+        <div class="testimonial-wrapper">
+
+            <!-- Testimoni 1: Denny Sumargo -->
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <blockquote>"Pengalaman terbaik yang pernah saya dapatkan. Detail pelayanannya luar biasa, dari kopi gratis hingga handuk hangat setelah cukur. MILE benar-benar mengerti arti kualitas."</blockquote>
+                <div class="reviewer">
+                    <img src="images.webp" alt="Denny Sumargo">
+                    <cite>— Denny Sumargo, Entertainment</cite>
+                </div>
+            </div>
+
+            <div class="testimonial-divider"></div>
+
+            <!-- Testimoni 2: Raymond Chin -->
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <blockquote>"Reservasi secara online membuat jadwal saya untuk ke barber lebih worth ditambah excellence service dari MILE crew."</blockquote>
+                <div class="reviewer">
+                    <img src="images__1_.webp" alt="Raymond Chin">
+                    <cite>— Raymond Chin, Influencer</cite>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -410,9 +506,29 @@
                     </div>
                     <button type="submit" class="submit-btn">Confirm Appointment</button>
                 </form>
+
+                <!-- WhatsApp Button -->
+                <div style="margin-top: 16px; text-align: center;">
+                    <a href="https://wa.me/6281586005256" target="_blank" class="wa-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.75.75 0 00.918.941l5.4-1.416A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.608-.5-5.12-1.373l-.36-.214-3.844 1.008 1.026-3.742-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                        </svg>
+                        Chat via WhatsApp
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/6281586005256" target="_blank" class="wa-float" title="Chat via WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.75.75 0 00.918.941l5.4-1.416A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.608-.5-5.12-1.373l-.36-.214-3.844 1.008 1.026-3.742-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+    </a>
 
     <!-- FOOTER -->
     <footer>
