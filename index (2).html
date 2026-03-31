@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILE BARBERSHOP | Premium Grooming & Masters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwindConfig = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#121212',
+                        'gold': '#D4AF37',
+                        'off-white': '#F9F9F9'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#121212',
+                        'gold': '#D4AF37',
+                        'off-white': '#F9F9F9'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --primary: #121212;
+        }
+        body {
+            background-color: #F9F9F9;
+            color: #121212;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        .text-gold-custom { color: #D4AF37; }
+        .bg-primary-custom { background-color: #121212; }
+        .border-gold-custom { border-color: #D4AF37; }
+
+        .custom-gradient {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                        url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80') center/cover fixed;
+        }
+        .hover-gold:hover { color: #D4AF37; }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            width: 100%;
+            z-index: 50;
+            background-color: rgba(18,18,18,0.97);
+            color: white;
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            align-items: center;
+        }
+        .nav-links a { color: white; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #D4AF37; }
+        .nav-book {
+            background: #D4AF37;
+            color: white !important;
+            padding: 12px 28px;
+            transition: background 0.4s, color 0.4s !important;
+        }
+        .nav-book:hover { background: white !important; color: #121212 !important; }
+
+        /* Hero */
+        header.hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-content h4 {
+            color: #D4AF37;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            font-size: 0.8rem;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .hero-content h1 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+        .hero-btn {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 16px 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            text-decoration: none;
+            transition: background 0.6s, color 0.6s;
+            display: inline-block;
+        }
+        .hero-btn:hover { background: white; color: black; }
+
+        /* Sections */
+        section { padding: 96px 80px; }
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            section { padding: 64px 24px; }
+        }
+
+        /* Philosophy */
+        .philosophy { background: white; text-align: center; }
+        .philosophy blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-style: italic;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .divider { width: 80px; height: 1px; background: #D4AF37; margin: 0 auto 32px; }
+        .philosophy p { color: #71717a; line-height: 1.8; font-weight: 300; max-width: 600px; margin: 0 auto; }
+
+        /* Styles grid */
+        .styles-section { background: #f4f4f4; }
+        .styles-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; flex-wrap: wrap; gap: 16px; }
+        .styles-header h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 8px; }
+        .styles-header p { color: #71717a; }
+        .catalog-link { color: #D4AF37; border-bottom: 1px solid #D4AF37; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
+        .catalog-link:hover { color: #121212; border-color: #121212; }
+
+        .styles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        .style-card { position: relative; overflow: hidden; background: black; aspect-ratio: 3/4; }
+        .style-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 1s, opacity 0.5s; }
+        .style-card:hover img { transform: scale(1.1); opacity: 0.6; }
+        .style-info {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 32px;
+        }
+        .style-info h3 { color: white; font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; }
+        .style-info p { color: #a1a1aa; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .style-link { color: #D4AF37; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; opacity: 0; transition: opacity 0.4s; }
+        .style-card:hover .style-link { opacity: 1; }
+
+        /* Barbers */
+        .barbers-section { background: white; }
+        .section-title { text-align: center; margin-bottom: 64px; }
+        .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 12px; }
+        .section-title .bar { width: 48px; height: 4px; background: #D4AF37; margin: 0 auto; }
+        .barbers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; max-width: 900px; margin: 0 auto; }
+        .barber-card { display: flex; align-items: center; gap: 32px; padding: 24px; filter: grayscale(1); transition: filter 0.6s, box-shadow 0.4s; border: 1px solid transparent; }
+        .barber-card:hover { filter: grayscale(0); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: #f4f4f5; }
+        .barber-card img { width: 140px; height: 200px; object-fit: cover; flex-shrink: 0; }
+        .barber-info h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 6px; }
+        .barber-info .role { color: #D4AF37; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+        .barber-info blockquote { color: #71717a; font-size: 0.85rem; font-style: italic; }
+
+        /* Testimonial */
+        .testimonial { background: #121212; color: white; text-align: center; padding: 96px 80px; }
+        .testimonial-wrapper { display: flex; flex-direction: column; gap: 64px; }
+        .testimonial-item { max-width: 760px; margin: 0 auto; }
+        .stars { color: #D4AF37; font-size: 1.3rem; margin-bottom: 32px; letter-spacing: 4px; }
+        .testimonial-item blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-style: italic;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+        .testimonial-item .reviewer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .testimonial-item .reviewer img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #D4AF37;
+        }
+        .testimonial-item cite {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #a1a1aa;
+            font-style: normal;
+        }
+        .testimonial-divider {
+            width: 60px;
+            height: 1px;
+            background: rgba(212,175,55,0.3);
+            margin: 0 auto;
+        }
+
+        /* Booking */
+        .booking-section { background: #f9f9f9; }
+        .booking-card { max-width: 900px; margin: 0 auto; background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.1); display: flex; overflow: hidden; }
+        .booking-left { background: #121212; color: white; padding: 48px; flex: 0 0 300px; }
+        .booking-left h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 24px; }
+        .booking-left p { color: #a1a1aa; font-size: 0.85rem; line-height: 1.7; margin-bottom: 32px; }
+        .booking-info { font-size: 0.75rem; color: #a1a1aa; display: flex; flex-direction: column; gap: 16px; }
+        .booking-right { padding: 48px; flex: 1; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .form-field { display: flex; flex-direction: column; gap: 6px; }
+        .form-field label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; color: #a1a1aa; }
+        .form-field select, .form-field input {
+            border: none; border-bottom: 1px solid #e4e4e7;
+            padding: 10px 0; outline: none; background: transparent;
+            font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #121212;
+            transition: border-color 0.3s;
+        }
+        .form-field select:focus, .form-field input:focus { border-color: #D4AF37; }
+        .form-field-full { margin-bottom: 24px; }
+        .submit-btn {
+            width: 100%; background: #121212; color: white;
+            padding: 16px; border: none; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; font-weight: 700;
+            transition: background 0.4s; font-family: 'Inter', sans-serif;
+        }
+        .submit-btn:hover { background: #D4AF37; }
+
+        /* WhatsApp Button */
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            padding: 14px 32px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.3s, transform 0.2s;
+            border-radius: 2px;
+        }
+        .wa-btn:hover {
+            background: #1ebe5d;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .booking-card { flex-direction: column; }
+            .booking-left { flex: none; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        footer {
+            background: #121212; color: white;
+            padding: 48px 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            flex-wrap: wrap; gap: 24px;
+        }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+        .footer-links { display: flex; gap: 32px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; }
+        .footer-links a { color: #71717a; text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: #D4AF37; }
+        .footer-copy { font-size: 0.65rem; color: #52525b; }
+        @media (max-width: 768px) { footer { padding: 40px 24px; flex-direction: column; text-align: center; } }
+
+        /* Floating WA Button */
+        .wa-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 999;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse-wa 2s infinite;
+        }
+        .wa-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37,211,102,0.7);
+        }
+        @keyframes pulse-wa {
+            0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+            70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-logo">MILE<span style="color:#D4AF37">.</span></div>
+        <div class="nav-links">
+            <a href="#about">Our Story</a>
+            <a href="#styles">Lookbook</a>
+            <a href="#barbers">Masters</a>
+            <a href="#booking" class="nav-book">Book Appointment</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero custom-gradient">
+        <div class="hero-content" style="padding: 0 24px;">
+            <h4>The Art of Precision</h4>
+            <h1>Crafting Your<br>Signature Presence.</h1>
+            <a href="#styles" class="hero-btn">Explore Styles</a>
+        </div>
+    </header>
+
+    <!-- PHILOSOPHY -->
+    <section id="about" class="philosophy">
+        <div style="max-width:680px; margin:0 auto;">
+            <blockquote>"Bukan sekadar potong rambut, melainkan sebuah ritual kemewahan yang merayakan identitas setiap pria."</blockquote>
+            <div class="divider"></div>
+            <p>MILE Barbershop menghadirkan standar baru dalam dunia grooming. Menggabungkan teknik tradisional dengan estetika modern di dalam ruang yang dirancang untuk kenyamanan maksimal Anda.</p>
+        </div>
+    </section>
+
+    <!-- LOOKBOOK -->
+    <section id="styles" class="styles-section">
+        <div class="styles-header">
+            <div>
+                <h2>Signature Styles</h2>
+                <p>Pilih karakter yang ingin Anda tunjukkan.</p>
+            </div>
+            <a href="#" class="catalog-link">View Full Catalog</a>
+        </div>
+        <div class="styles-grid">
+            <div class="style-card">
+                <img src="https://images.unsplash.com/photo-1621605815841-aa89740b0282?auto=format&fit=crop&q=80" alt="Executive Quiff">
+                <div class="style-info">
+                    <h3>The Executive Quiff</h3>
+                    <p>45 Mins · Classic & Sharp</p>
+                    <a href="#booking" class="style-link">Select Style →</a>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="https://images.unsplash.com/photo-1599351431247-f50776d1d563?auto=format&fit=crop&q=80" alt="Modern Skin Fade">
+                <div class="style-info">
+                    <h3>Modern Skin Fade</h3>
+                    <p>60 Mins · Bold & Precision</p>
+                    <a href="#booking" class="style-link">Select Style →</a>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&q=80" alt="Signature Beard Trim">
+                <div class="style-info">
+                    <h3>Signature Beard Trim</h3>
+                    <p>30 Mins · Detail Oriented</p>
+                    <a href="#booking" class="style-link">Select Style →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARBERS -->
+    <section id="barbers" class="barbers-section">
+        <div class="section-title">
+            <h2>Meet The Masters</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="barbers-grid">
+            <div class="barber-card">
+                <img src="barber1.png" alt="Andrew">
+                <div class="barber-info">
+                    <h3>Andrew</h3>
+                    <p class="role">Master of Classic Cut</p>
+                    <blockquote>"Ketelitian adalah bahasa saya dalam menciptakan karya seni di setiap helai rambut."</blockquote>
+                </div>
+            </div>
+            <div class="barber-card">
+                <img src="barber2.png" alt="Jookss">
+                <div class="barber-info">
+                    <h3>Jokoxxs</h3>
+                    <p class="role">Fade & Texture Specialist</p>
+                    <blockquote>"Menghadirkan rasa percaya diri melalui presisi gradasi yang sempurna."</blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="testimonial">
+        <div class="testimonial-wrapper">
+
+            <!-- Testimoni 1: Denny Sumargo -->
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <blockquote>"Pengalaman terbaik yang pernah saya dapatkan. Detail pelayanannya luar biasa, dari kopi gratis hingga handuk hangat setelah cukur. MILE benar-benar mengerti arti kualitas."</blockquote>
+                <div class="reviewer">
+                    <img src="images.webp" alt="Denny Sumargo">
+                    <cite>— Denny Sumargo, Entertainment</cite>
+                </div>
+            </div>
+
+            <div class="testimonial-divider"></div>
+
+            <!-- Testimoni 2: Raymond Chin -->
+            <div class="testimonial-item">
+                <div class="stars">★★★★★</div>
+                <blockquote>"Reservasi secara online membuat jadwal saya untuk ke barber lebih worth ditambah excellence service dari MILE crew."</blockquote>
+                <div class="reviewer">
+                    <img src="raymond.webp" alt="Raymond Chin">
+                    <cite>— Raymond Chin, Influencer</cite>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="booking" class="booking-section">
+        <div class="booking-card">
+            <div class="booking-left">
+                <h2>Reserve Your Seat</h2>
+                <p>Pilih jadwal Anda dan rasakan transformasi maksimal di tangan ahli kami.</p>
+                <div class="booking-info">
+                    <span>📍 Sudirman Business District, Jakarta</span>
+                    <span>📞 +62 81586005256</span>
+                    <span>⏰ 10:00 AM - 09:00 PM</span>
+                </div>
+            </div>
+            <div class="booking-right">
+                <form onsubmit="return false;">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label>Pilih Layanan</label>
+                            <select>
+                                <option>Signature Haircut</option>
+                                <option>Beard Grooming</option>
+                                <option>The Ultimate MILE Package</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Pilih Barber</label>
+                            <select>
+                                <option>Andrew</option>
+                                <option>Jookss</option>
+                                <option>Any Barber</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Tanggal</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-field">
+                            <label>Waktu</label>
+                            <select>
+                                <option>10:00 AM</option>
+                                <option>13:00 PM</option>
+                                <option>16:00 PM</option>
+                                <option>19:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field form-field-full">
+                        <label>Nama Lengkap</label>
+                        <input type="text" placeholder="Your Name">
+                    </div>
+                    <button type="submit" class="submit-btn">Confirm Appointment</button>
+                </form>
+
+                <!-- WhatsApp Button -->
+                <div style="margin-top: 16px; text-align: center;">
+                    <a href="https://wa.me/6281586005256" target="_blank" class="wa-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.75.75 0 00.918.941l5.4-1.416A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.608-.5-5.12-1.373l-.36-.214-3.844 1.008 1.026-3.742-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                        </svg>
+                        Chat via WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/6281586005256" target="_blank" class="wa-float" title="Chat via WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.75.75 0 00.918.941l5.4-1.416A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.608-.5-5.12-1.373l-.36-.214-3.844 1.008 1.026-3.742-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">MILE<span style="color:#D4AF37">.</span></div>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <p class="footer-copy">© 2025 MILE BARBERSHOP. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+</body>
+</html>
