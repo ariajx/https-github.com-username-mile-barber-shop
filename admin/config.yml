@@ -1,0 +1,76 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Folder tempat menyimpan gambar yang diupload
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+
+  # -----------------------------------------------
+  # 1. GALERI FOTO
+  # Klien bisa upload foto hasil pangkas, suasana barbershop, dll
+  # -----------------------------------------------
+  - name: "gallery"
+    label: "Galeri Foto"
+    label_singular: "Foto"
+    folder: "gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul Foto", name: "title", widget: "string", hint: "Contoh: Hasil Pangkas Klasik" }
+      - { label: "Gambar", name: "image", widget: "image", hint: "Upload foto dalam format JPG atau PNG" }
+      - { label: "Deskripsi (opsional)", name: "description", widget: "text", required: false, hint: "Keterangan singkat tentang foto ini" }
+
+  # -----------------------------------------------
+  # 2. LAYANAN / HARGA
+  # Klien bisa tambah atau update daftar layanan dan harga
+  # -----------------------------------------------
+  - name: "services"
+    label: "Layanan & Harga"
+    label_singular: "Layanan"
+    folder: "services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nama Layanan", name: "title", widget: "string", hint: "Contoh: Potong Rambut Reguler" }
+      - { label: "Harga", name: "price", widget: "string", hint: "Contoh: Rp 35.000" }
+      - { label: "Deskripsi Layanan", name: "description", widget: "text", required: false }
+      - { label: "Gambar Layanan (opsional)", name: "image", widget: "image", required: false }
+
+  # -----------------------------------------------
+  # 3. ARTIKEL / PROMO
+  # Klien bisa tulis artikel promo, tips perawatan rambut, dll
+  # -----------------------------------------------
+  - name: "posts"
+    label: "Artikel & Promo"
+    label_singular: "Artikel"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal Publish", name: "date", widget: "datetime" }
+      - { label: "Gambar Utama", name: "thumbnail", widget: "image", required: false }
+      - { label: "Isi Artikel", name: "body", widget: "markdown", hint: "Tulis konten artikel atau info promo di sini" }
+
+  # -----------------------------------------------
+  # 4. INFORMASI BARBERSHOP
+  # Klien bisa update info umum: nama, alamat, jam buka, nomor WA
+  # -----------------------------------------------
+  - name: "settings"
+    label: "Informasi Barbershop"
+    files:
+      - label: "Info Umum"
+        name: "general"
+        file: "content/settings.yml"
+        fields:
+          - { label: "Nama Barbershop", name: "nama", widget: "string" }
+          - { label: "Tagline / Slogan", name: "tagline", widget: "string", required: false }
+          - { label: "Nomor WhatsApp", name: "whatsapp", widget: "string", hint: "Format: 628xxxxxxxxx (tanpa tanda +)" }
+          - { label: "Alamat Lengkap", name: "alamat", widget: "text" }
+          - { label: "Jam Buka", name: "jam_buka", widget: "string", hint: "Contoh: Senin - Sabtu, 09.00 - 21.00" }
+          - { label: "Instagram", name: "instagram", widget: "string", required: false, hint: "Username saja, tanpa @" }
+          - { label: "Facebook", name: "facebook", widget: "string", required: false }
+          - { label: "Logo Barbershop", name: "logo", widget: "image", required: false }
